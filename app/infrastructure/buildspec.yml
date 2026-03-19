@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - echo Installing dependencies
+      - mkdir -p package
+      - pip install -r app/requirements.txt -t package/
+  build:
+    commands:
+      - echo Validating Python
+      - python -m py_compile app/main.py
+      - cp -r app/* package/
+  post_build:
+    commands:
+      - echo Build completed successfully
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: package
