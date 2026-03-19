@@ -1,6 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Sample infrastructure for application deployment
 
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+
 Resources:
   AppBucket:
     Type: AWS::S3::Bucket
@@ -12,7 +16,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Security group for sample app
-      VpcId: vpc-12345678
+      VpcId: !Ref VpcId
 
 Outputs:
   BucketName:
